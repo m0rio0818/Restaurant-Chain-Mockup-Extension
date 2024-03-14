@@ -12,6 +12,19 @@ $format = $_POST["format"] ?? "html";
 
 $count = (int) $count;
 
+if (is_null($count) || is_null($format)) {
+    exit('Missing parameters.');
+}
+
+if (!is_numeric($count) || $count < 1 || $count > 100) {
+    exit('Invalid count. Must be a number between 1 and 100.');
+}
+
+$allowedFormats = ['json', 'txt', 'html', 'md'];
+if (!in_array($format, $allowedFormats)) {
+    exit('Invalid type. Must be one of: ' . implode(', ', $allowedFormats));
+}
+
 // ユーザーを生成
 $users = Helpers\RandomGenerator::generateArray("user", $count, $count);
 

@@ -125,12 +125,20 @@ class User implements FileConvertible
     public function toString(): string
     {
         return sprintf(
-            "User ID: %d \nName : %s %s\nEmail: %s\nAddress: %s\nBirthDate: %s\nMemberShip Expiration Date: %s\nRole: %s\n",
+            "
+            User ID: %d\n
+            Name : %s %s\n
+            Email: %s\n
+            Address: %s\n
+            BirthDate: %s\n
+            MemberShip Expiration Date: %s\n
+            Role: %s\n",
             $this->id,
             $this->firstName,
             $this->lastName,
+            $this->email,
             $this->address,
-            $this->birthDate,
+            $this->birthDate->format("Y-m-d"),
             $this->membershipExpirationDate->format("Y-m-d"),
             $this->role,
         );
@@ -141,7 +149,6 @@ class User implements FileConvertible
         return sprintf(
             "
             <div class='user-card'>
-                <div class='avater'>SAMPLE</div>
                 <h2>%s %s</h2>
                 <p>%s</p>
                 <p>%s</p>
@@ -164,11 +171,11 @@ class User implements FileConvertible
     public function toMarkDown(): string
     {
         return "## User: {$this->firstName} {$this->lastName}\n" .
-           " - Email: {$this->email}\n" .
-           " - Phone Number: {$this->phoneNumber}\n" .
-           " - Address: {$this->address}\n" .
-           " - Birth Date: {$this->birthDate->format("Y-m-d")}\n" .
-           " - Role: {$this->role}\n";
+            " - Email: {$this->email}\n" .
+            " - Phone Number: {$this->phoneNumber}\n" .
+            " - Address: {$this->address}\n" .
+            " - Birth Date: {$this->birthDate->format("Y-m-d")}\n" .
+            " - Role: {$this->role}\n";
     }
 
     public function toArray(): array

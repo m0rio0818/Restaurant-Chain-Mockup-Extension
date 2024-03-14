@@ -17,7 +17,7 @@
             <option value="html">HTML</option>
             <option value="markdown">Markdown</option>
             <option value="json">JSON</option>
-            <option value="txt">Text</option>
+            <option value="text">Text</option>
         </select>
 
         <button type="submit">Generate</button>
