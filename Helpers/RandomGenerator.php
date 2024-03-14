@@ -7,9 +7,31 @@ use Faker\Factory;
 use Models\Users;
 use Models\Companies\RestaurantChains\RestaurantChain;
 use Models\RestaurantLocations\RestaurantLocation;
+use Models\Users\User;
+
+use function PHPSTORM_META\type;
 
 class RandomGenerator
 {
+    public static function user(): User
+    {
+        $faker = Factory::create();
+
+        return new User(
+            $faker->randomNumber(),
+            $faker->firstName(),
+            $faker->lastName(),
+            $faker->email,
+            $faker->password,
+            $faker->phoneNumber,
+            $faker->address,
+            $faker->dateTimeThisCentury,
+            $faker->dateTimeBetween('-10 years', '+20 years'),
+            $faker->randomElement(['admin', 'user', 'editor'])
+        );
+    }
+
+
     public static function employee(): Employee
     {
         $faker = Factory::create();
@@ -83,7 +105,8 @@ class RandomGenerator
         $numOfArray = $faker->numberBetween($min, $max);
 
         for ($i = 0; $i < $numOfArray; $i++) {
-            if ($type == "employee") $arrays[] = self::employee();
+            if ($type == "user") $arrays[] = self::user();
+            elseif ($type == "employee") $arrays[] = self::employee();
             elseif ($type == "location") $arrays[] = self::restaurantLocation();
             elseif ($type == "chain") $arrays[] = self::restaurantChain();
         }

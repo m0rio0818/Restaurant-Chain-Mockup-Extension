@@ -42,43 +42,53 @@ class User implements FileConvertible
         $this->role = $role;
     }
 
-    public function getId() : string {
+    public function getId(): string
+    {
         return $this->id;
     }
 
-    public function getFirstName() : string {
-        return $this->firstName;        
+    public function getFirstName(): string
+    {
+        return $this->firstName;
     }
 
-    public  function getLastName() : string {
-        return $this->lastName;        
+    public  function getLastName(): string
+    {
+        return $this->lastName;
     }
 
-    public function getEmail() : string {
-        return $this->email;        
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
-    public function getPassword() : string {
+    public function getPassword(): string
+    {
         return $this->hashedPassword;
     }
 
-    public function getPhoneNumber() : string {
-        return $this->phoneNumber;        
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
     }
 
-    public function getAddress() : string {
+    public function getAddress(): string
+    {
         return $this->address;
     }
 
-    public function getBirthDate() : DateTime {
+    public function getBirthDate(): DateTime
+    {
         return $this->birthDate;
     }
 
-    public function getMembershipExpireationDate() : DateTime {
-        return $this->getMembershipExpireationDate();       
+    public function getMembershipExpireationDate(): DateTime
+    {
+        return $this->getMembershipExpireationDate();
     }
 
-    public function getRole() : string {
+    public function getRole(): string
+    {
         return $this->role;
     }
 
@@ -153,12 +163,12 @@ class User implements FileConvertible
 
     public function toMarkDown(): string
     {
-        return "## User : {$this->firstName} {$this->lastName}
-                 -Email : {$this->email}
-                 -Address: {$this->address}
-                 -BirthDate : {$this->birthDate}
-                 -IsActive: {$this->hasMembershipExpired() }
-                 -Role : {$this->role}";
+        return "## User: {$this->firstName} {$this->lastName}\n" .
+           " - Email: {$this->email}\n" .
+           " - Phone Number: {$this->phoneNumber}\n" .
+           " - Address: {$this->address}\n" .
+           " - Birth Date: {$this->birthDate->format("Y-m-d")}\n" .
+           " - Role: {$this->role}\n";
     }
 
     public function toArray(): array
@@ -177,5 +187,3 @@ class User implements FileConvertible
         ];
     }
 }
-
-?>
