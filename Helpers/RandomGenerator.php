@@ -66,7 +66,7 @@ class RandomGenerator
             $faker->address(),
             $faker->city(),
             $faker->state(),
-            $faker->generatePostalCode($postal_min, $postal_max),
+            self::generatePostalCode($postal_min, $postal_max),
             self::employees($employees, $salary_min,  $salary_max),
             $faker->boolean(),
             $faker->boolean(),
@@ -112,14 +112,13 @@ class RandomGenerator
         $pos_max_tail = (int) substr($postal_max, 4, 7);
 
         $pos_min = $pos_min_head * 10000 + $pos_min_tail;
-        $pos_min = $pos_max_head * 10000 + $pos_max_tail;
+        $pos_max = $pos_max_head * 10000 + $pos_max_tail;
 
         $faker = Factory::create();
 
-        $postCode = (string)$faker->numberBetween($pos_min, $pos_min);
-        echo "最終的なpostcode" . $postCode . PHP_EOL;
-
-        return substr($postCode, 0, 3) . "-" . substr($postCode, 4, 7);
+        $postCode = (string) $faker->numberBetween($pos_min, $pos_max);
+        
+        return substr($postCode, 0, 3) . "-" . substr($postCode, 3);
     }
 
 
