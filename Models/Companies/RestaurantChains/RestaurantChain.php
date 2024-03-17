@@ -78,14 +78,13 @@ class RestaurantChain extends Company implements FileConvertible
             $this->getTotalEmployee(),
         );
     }
+    
     public function toHTML(): string
     {
         $locationsLists = "";
         foreach ($this->restaurantLocations as $location) {
             $locationsLists .=  $location->toHTML();
         }
-
-
 
         return sprintf(
             "

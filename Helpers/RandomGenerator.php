@@ -9,7 +9,6 @@ use Models\Companies\RestaurantChains\RestaurantChain;
 use Models\RestaurantLocations\RestaurantLocation;
 use Models\Users\User;
 
-use function PHPSTORM_META\type;
 
 class RandomGenerator
 {
@@ -31,8 +30,7 @@ class RandomGenerator
         );
     }
 
-
-    public static function employee(): Employee
+    public static function employee(int $salary_min, int $salary_max): Employee
     {
         $faker = Factory::create();
 
@@ -48,15 +46,42 @@ class RandomGenerator
             $faker->dateTimeBetween('-10 years', '+20 years'),
             $faker->randomElement(['admin', 'user', 'editor']),
             $faker->randomElement(["Chef", "Cashier", "Server", "Cooking Assistance"]),
-            $faker->randomFloat(),
+            $faker->randomFloat(1, $salary_min, $salary_max),
             $faker->dateTimeBetween('-10 years', 'now'),
             array($faker->randomElement(["Great!!", "Good!", "Not bad", "Same..", "NextTime..."])),
         );
     }
 
+    public static function restaurantLocation(
+        int $employees,
+        int $salary_min,
+        int $salary_max,
+        string $postal_min,
+        string $postal_max
+    ): RestaurantLocation {
+        $faker = Factory::create();
 
-    public static function restaurantChain(): RestaurantChain
-    {
+        return new RestaurantLocation(
+            $faker->streetAddress(),
+            $faker->address(),
+            $faker->city(),
+            $faker->state(),
+            $faker->generatePostalCode($postal_min, $postal_max),
+            self::employees($employees, $salary_min,  $salary_max),
+            $faker->boolean(),
+            $faker->boolean(),
+            $faker->randomNumber()
+        );
+    }
+
+    public static function restaurantChain(
+        int $locations,
+        int $employees,
+        int $salary_min,
+        int $salary_max,
+        string $postal_min,
+        string $postal_max
+    ): RestaurantChain {
         $faker = Factory::create();
 
         return new RestaurantChain(
@@ -70,45 +95,88 @@ class RandomGenerator
             $faker->boolean(),
             $faker->country(),
             $faker->name(),
-            $faker->randomNumber(),
+            $employees,
             $faker->randomNumber(4, true),
-            self::generateArray("location", 2, 10),
+            self::restaurantLocations($locations, $employees, $salary_min, $salary_max, $postal_min, $postal_max),
             $faker->randomElement(["Chiniese", "Japanese", "Korean", "Italian", "French", "English"]),
-            $faker->randomNumber(),
+            $locations,
             $faker->company(),
         );
     }
 
-
-    public static function restaurantLocation(): RestaurantLocation
+    public static function generatePostalCode(string $postal_min, string $postal_max): string
     {
+        $pos_min_head = (int) substr($postal_min, 0, 3);
+        $pos_min_tail = (int) substr($postal_min, 4, 7);
+        $pos_max_head = (int) substr($postal_max, 0, 3);
+        $pos_max_tail = (int) substr($postal_max, 4, 7);
+
+        $pos_min = $pos_min_head * 10000 + $pos_min_tail;
+        $pos_min = $pos_max_head * 10000 + $pos_max_tail;
+
         $faker = Factory::create();
 
-        return new RestaurantLocation(
-            $faker->streetAddress(),
-            $faker->address(),
-            $faker->city(),
-            $faker->state(),
-            $faker->postcode(),
-            self::generateArray("employee", 2, 10),
-            $faker->boolean(),
-            $faker->boolean(),
-            $faker->randomNumber()
-        );
+        $postCode = (string)$faker->numberBetween($pos_min, $pos_min);
+        echo "最終的なpostcode" . $postCode . PHP_EOL;
+
+        return substr($postCode, 0, 3) . "-" . substr($postCode, 4, 7);
     }
 
 
-    public static function generateArray(string $type, int $min = 2, int $max = 10): array
-    {
-        $faker = Factory::create();
+    public static function employees(
+        int $employees,
+        int $salary_min,
+        int $salary_max,
+    ): array {
         $arrays = [];
-        $numOfArray = $faker->numberBetween($min, $max);
+        for ($i = 0; $i < $employees; $i++) {
+            $arrays[] = self::employee($salary_min, $salary_max);
+        }
 
-        for ($i = 0; $i < $numOfArray; $i++) {
-            if ($type == "user") $arrays[] = self::user();
-            elseif ($type == "employee") $arrays[] = self::employee();
-            elseif ($type == "location") $arrays[] = self::restaurantLocation();
-            elseif ($type == "chain") $arrays[] = self::restaurantChain();
+        return $arrays;
+    }
+
+
+    public static function restaurantLocations(
+        int $locations,
+        int $employees,
+        int $salary_min,
+        int $salary_max,
+        string $postal_min,
+        string $postal_max
+    ): array {
+        $arrays = [];
+        for ($i = 0; $i < $locations; $i++) {
+            $arrays[] = self::restaurantLocation(
+                $employees,
+                $salary_min,
+                $salary_max,
+                $postal_min,
+                $postal_max
+            );
+        }
+
+        return $arrays;
+    }
+
+    public static function restaurantChains(
+        int $locations,
+        int $employees,
+        int $salary_min,
+        int $salary_max,
+        string $postal_min,
+        string $postal_max
+    ): array {
+        $arrays = [];
+        for ($i = 0; $i < $locations; $i++) {
+            $arrays[] = self::restaurantChain(
+                $locations,
+                $employees,
+                $salary_min,
+                $salary_max,
+                $postal_min,
+                $postal_max
+            );
         }
 
         return $arrays;

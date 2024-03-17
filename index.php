@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="./css/style.css">
 
 <body>
-    <from action="download.php" method="post">
+    <form action="download.php" method="post">
         <div class="p-5">
             <div class="py-3 row">
                 <label class="col-3 col-form-label" for="employee">Number of Employees: </label>
@@ -33,7 +33,7 @@
                             <div class="input-group-text">$</div>
                         </div>
                         <div class="col-8">
-                            <input class="form-control" type="number" id="salary_min" name="salary_min" min="1" max="100" value="5">
+                            <input class="form-control" type="number" id="salary_min" name="salary_min" min="1" max="10000" value="100">
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                             <div class="input-group-text">$</div>
                         </div>
                         <div class="col-8">
-                            <input class="form-control" type="number" id="salary_max" name="salary_max" min="1" max="100" value="5">
+                            <input class="form-control" type="number" id="salary_max" name="salary_max" min="1" max="" value="">
                         </div>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                 <label class="col-3 col-form-label" for="postcode_min">Postal Code Range: </label>
                 <div class="col-3">
                     <div class="input-group">
-                        <div class="col-8">
-                            <input class="form-control" type="number" id="postcode_min" name="postcode_min" min="1" max="100" value="5">
+                        <div class="col-12">
+                            <input class="form-control" type="text" id="postcode_min" name="postcode_min" autocomplete="postal-code" pattern="\d{3}-\d{4}" minlength="7" maxlength="8" placeholder="123-4567" value="123-4567">
                         </div>
                     </div>
                 </div>
@@ -66,17 +66,16 @@
                 </div>
                 <div class="col-3">
                     <div class="input-group">
-                        <div class="col-8">
-                            <input class="form-control" type="number" id="postcode_max" name="postcode_max" min="1" max="100" value="5">
+                        <div class="col-12">
+                            <input class="form-control" type="text" id="postcode_max" name="postcode_max" autocomplete="postal-code" pattern="\d{3}-\d{4}"  minlength="7" maxlength="8" placeholder="987-6543" value="987-6543">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label for="format" class="col-3"> Download Format: </label>
-
-                <div class="col-2">
+                <label for="format" class="col-3 col-form-label"> Download Format: </label>
+                <div class="col-3">
                     <div class="input-group">
                         <select name="format" id="format" class="form-select">
                             <option value="html">HTML</option>
@@ -91,22 +90,8 @@
         <div class="d-flex justify-content-center py-2">
             <button class="btn btn-primary col-3" type="submit">Generate</button>
         </div>
-        </div>
-
-    </from>
+    </form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 </html>
-
-
-<!--
-    Dropdown menu, show/hide based on menu state.
-
-    Entering: "transition ease-out duration-100"
-      From: "transform opacity-0 scale-95"
-      To: "transform opacity-100 scale-100"
-    Leaving: "transition ease-in duration-75"
-      From: "transform opacity-100 scale-100"
-      To: "transform opacity-0 scale-95"
-  -->

@@ -1,5 +1,9 @@
 .currency-symbol{
     position: relative;
     top: 8px; /* 調整したい値に合わせて変更してください */
+}
 
+::placeholder {
+    color: rgba(196, 194, 194, 0.701);
+    font-size: 1em;
 }
