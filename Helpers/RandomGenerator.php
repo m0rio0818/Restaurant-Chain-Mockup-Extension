@@ -46,7 +46,7 @@ class RandomGenerator
             $faker->dateTimeBetween('-10 years', '+20 years'),
             $faker->randomElement(['admin', 'user', 'editor']),
             $faker->randomElement(["Chef", "Cashier", "Server", "Cooking Assistance"]),
-            $faker->randomFloat(1, $salary_min, $salary_max),
+            $faker->randomFloat(2, $salary_min, $salary_max),
             $faker->dateTimeBetween('-10 years', 'now'),
             array($faker->randomElement(["Great!!", "Good!", "Not bad", "Same..", "NextTime..."])),
         );
@@ -117,7 +117,7 @@ class RandomGenerator
         $faker = Factory::create();
 
         $postCode = (string) $faker->numberBetween($pos_min, $pos_max);
-        
+
         return substr($postCode, 0, 3) . "-" . substr($postCode, 3);
     }
 

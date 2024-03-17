@@ -106,14 +106,19 @@ class RestaurantLocation implements FileConvertible
         );
     }
 
+    public function getEmployees() : array {
+        return $this->employees;               
+    }
+
+    public function getAddresss(): string
+    {
+        return $this->zipCode . ": " . $this->state . ", " . $this->city . ", " . $this->address;
+    }
+
     public function toMarkDown(): string
     {
-        return "## User : {$this->name}
-        -Address : {$this->address}
-        -ZipCode : {$this->zipCode}
-        -State : {$this->state}
-        -City : {$this->city}
-        ";
+        return "### {$this->name}  \n" .
+            "- " . $this->getAddresss() . "\n";
     }
 
     public function toArray(): array

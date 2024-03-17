@@ -1,6 +1,8 @@
 <?php
 // コードベースのファイルのオートロード
 
+use Helpers\GenerateFiles;
+
 use function PHPSTORM_META\type;
 
 spl_autoload_extensions(".php");
@@ -14,10 +16,8 @@ $employee = (int)($_POST["employee"] ?? 5);
 $location = (int)($_POST["location"] ?? 5);
 $salary_min = (int)($_POST["salary_min"] ?? 100);
 $salary_max  = (int)($_POST["salary_max"] ?? 1000);
-
 $postcode_min = isset($_POST["postcode_min"]) ? $_POST["postcode_min"] : "123-4567";
 $postcode_max = isset($_POST["postcode_max"]) ? $_POST["postcode_max"] : "456-7891";
-
 $format = $_POST["format"] ?? "html";
 
 
@@ -62,12 +62,13 @@ $restrauntChains = Helpers\RandomGenerator::restaurantChains(
 );
 
 
-if ($format == "markdown") {
+if ($format == "md") {
     header("Content-Type: text/markdown");
     header("Content-Disposition: attachment; filename=user.md");
-    foreach ($users as $user) {
-        echo $user->toMarkdown();
-    }
+    // foreach ($users as $user) {
+    //     echo $user->toMarkdown();
+    // }
+    GenerateFiles::generateMarkDown($restrauntChains);
 } else if ($format == "json") {
     header("Content-Type: text/json");
     header("Content-Disposition: attachment; filename=user.json");

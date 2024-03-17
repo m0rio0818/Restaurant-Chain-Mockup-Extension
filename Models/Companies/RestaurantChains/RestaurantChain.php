@@ -13,7 +13,6 @@ class RestaurantChain extends Company implements FileConvertible
     private int $numberOfLocations;
     private string $parentCompany;
 
-
     public function __construct(
         string $name,
         int $foundingYear,
@@ -52,11 +51,16 @@ class RestaurantChain extends Company implements FileConvertible
         $this->parentCompany = $parentCompany;
     }
 
+    public function getRestaurantLocations(): array
+    {
+        return $this->restaurantLocations;
+    }
+
     public function toString(): string
     {
         return sprintf(
             "
-            Name: %s\n
+            Restraunt Chains: %s\n
             Founding Year: %d\n
             Description: %s\n
             Website: %s\n
@@ -78,7 +82,7 @@ class RestaurantChain extends Company implements FileConvertible
             $this->getTotalEmployee(),
         );
     }
-    
+
     public function toHTML(): string
     {
         $locationsLists = "";
@@ -100,17 +104,15 @@ class RestaurantChain extends Company implements FileConvertible
 
     public function toMarkDown(): string
     {
-        return "## User : {$this->getName()}
-        -Found Year : {$this->getFoundingYear()}
-        -Description : {$this->getDescription()}
-        -WebSite : {$this->getWebsite()}
-        -Phone : {$this->getPhone()}
-        -Industry: {$this->getIndustry()}
-        -CEO : {$this->getCeo()}
-        -Country: {$this->getCountry()}
-        -Founder : {$this->getFounder()}
-        -Total Num : {$this->getTotalEmployee()}
-        ";
+        return "# Restraunt Chains : {$this->getName()}\n" .
+            "## Restraunt Chains Informations \n" .
+            "- Found Year : {$this->getFoundingYear()}\n" .
+            "- WebSite : {$this->getWebsite()}\n" .
+            "- Phone : {$this->getPhone()}\n" .
+            "- Industry: {$this->getIndustry()}\n" .
+            "- CEO : {$this->getCeo()}\n" .
+            "- Country: {$this->getCountry()}\n" .
+            "### Total Nums of Locations : {$this->numberOfLocations}\n";
     }
 
     public function toArray(): array

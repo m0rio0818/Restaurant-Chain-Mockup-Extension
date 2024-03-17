@@ -79,7 +79,7 @@
                     <div class="input-group">
                         <select name="format" id="format" class="form-select">
                             <option value="html">HTML</option>
-                            <option value="markdown">MarkDown</option>
+                            <option value="md">MarkDown</option>
                             <option value="json">JSON</option>
                             <option value="text">Text</option>
                         </select>

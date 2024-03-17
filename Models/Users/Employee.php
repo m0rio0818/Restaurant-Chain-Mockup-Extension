@@ -98,16 +98,11 @@ class Employee extends User implements FileConvertible
 
     public function toMarkDown(): string
     {
-        return "## User : {$this->getFirstName()} {$this->getLastName()}
-                 -Email : {$this->getEmail()}
-                 -Address: {$this->getAddress()}
-                 -BirthDate : {$this->getBirthDate()}
-                 -IsActive: {$this->hasMembershipExpired()}
-                 -Role : {$this->getRole()}
-                 -JobTitle : {$this->jobTitle}
-                 -Salary : {$this->salary}
-                 -startDate : {$this->startDate}
-                 -awards : {$this->awards}";
+        return "  - #####  {$this->getFirstName()} {$this->getLastName()} \n"  .
+            "      - Role : {$this->getRole()} \n"  .
+            "      - JobTitle : {$this->jobTitle} \n"  .
+            "      - Salary : \${$this->salary} \n"  .
+            "      - startDate : {$this->startDate->format('Y-m-d')} \n";
     }
 
     public function toArray(): array
