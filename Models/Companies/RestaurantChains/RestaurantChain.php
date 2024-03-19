@@ -59,17 +59,15 @@ class RestaurantChain extends Company implements FileConvertible
     public function toString(): string
     {
         return sprintf(
-            "
-            Restraunt Chains: %s\n
-            Founding Year: %d\n
-            Description: %s\n
-            Website: %s\n
-            Phone: %s\n
-            Industry: %s\n
-            CEO: %s\nCountry: %s\n
-            Founder: %s\n
-            TotalEmployees Num: %d\n
-            ",
+            "<< Restraunt Chains Informations >> \n" .
+                " - Restraunt Chains: %s\n" .
+                " - Founding Year: %d\n" .
+                " - Description: %s\n" .
+                " - Website: %s\n" .
+                " - Phone: %s\n" .
+                " - Industry: %s\n" .
+                " - CEO: %s\n" .
+                " - Country: %s\n",
             $this->getName(),
             $this->getFoundingYear(),
             $this->getDescription(),
@@ -78,8 +76,6 @@ class RestaurantChain extends Company implements FileConvertible
             $this->getIndustry(),
             $this->getCeo(),
             $this->getCountry(),
-            $this->getFounder(),
-            $this->getTotalEmployee(),
         );
     }
 

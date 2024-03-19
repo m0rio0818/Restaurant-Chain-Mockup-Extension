@@ -46,7 +46,7 @@ if (!is_numeric($location) || $location < 1 || $location > 10) {
     exit('Invalid employee. Must be a number between 1 and 10.');
 }
 
-$allowedFormats = ['json', 'txt', 'html', 'md'];
+$allowedFormats = ['json', 'text', 'html', 'md'];
 if (!in_array($format, $allowedFormats)) {
     exit('Invalid type. Must be one of: ' . implode(', ', $allowedFormats));
 }
@@ -65,22 +65,16 @@ $restrauntChains = Helpers\RandomGenerator::restaurantChains(
 if ($format == "md") {
     header("Content-Type: text/markdown");
     header("Content-Disposition: attachment; filename=user.md");
-    // foreach ($users as $user) {
-    //     echo $user->toMarkdown();
-    // }
+
     GenerateFiles::generateMarkDown($restrauntChains);
 } else if ($format == "json") {
     header("Content-Type: text/json");
     header("Content-Disposition: attachment; filename=user.json");
-    // $usersArray = array_map(fn ($user) => $user->toArray(), $users);
-    // echo json_encode($usersArray);
     GenerateFiles::generateJson($restrauntChains);
 } else if ($format == "text") {
     header("Content-Type: text/plain");
     header("Content-Disposition: attachment; filename=user.txt");
-    foreach ($users as $user) {
-        echo $user->toString();
-    }
+    GenerateFiles::generateText($restrauntChains);
 } else {
     header("Content-Type: text/html");
     include "HTML.php";

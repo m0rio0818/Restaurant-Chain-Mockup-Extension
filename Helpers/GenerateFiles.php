@@ -39,11 +39,24 @@ class GenerateFiles
             $i++;
         }
         echo json_encode($ans, JSON_PRETTY_PRINT);
-        // $chainArray = array_map(fn ($chain) => $chain->toArray(), $restaurantChains);
-        // echo json_encode($chainArray, JSON_PRETTY_PRINT);
     }
 
     public static function generateText(array $restaurantChains): void
     {
+        foreach ($restaurantChains as $chain) {
+            echo $chain->toString();
+            $locations = $chain->getRestaurantLocations();
+
+            foreach ($locations as $locaition) {
+                // echo " ▪️ Locations => \n";
+                echo $locaition->toString();
+                echo "        ▪️ Employees => \n";
+                $employees = $locaition->getEmployees();
+                foreach ($employees as $employee) {
+                    echo $employee->toString();
+                }
+            }
+            echo "\n\n";
+        }
     }
 }

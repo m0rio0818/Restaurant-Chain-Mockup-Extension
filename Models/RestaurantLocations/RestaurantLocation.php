@@ -41,18 +41,10 @@ class RestaurantLocation implements FileConvertible
     public function toString(): string
     {
         return sprintf(
-            "
-            Name: %s\n
-            Address: %s\n
-            City: %s\n
-            State: %s\n
-            ZipCode: %s\n
-            ",
+            " ▪️ %s\n" .
+                "      - Address: %s\n",
             $this->name,
-            $this->address,
-            $this->city,
-            $this->state,
-            $this->zipCode,
+            $this->getAddresss()
         );
     }
     public function toHTML(): string
@@ -113,7 +105,7 @@ class RestaurantLocation implements FileConvertible
 
     public function getAddresss(): string
     {
-        return $this->zipCode . ": " . $this->state . ", " . $this->city . ", " . $this->address;
+        return $this->zipCode . ", " . $this->state . ", " . $this->city . ", " . $this->address;
     }
 
     public function toMarkDown(): string

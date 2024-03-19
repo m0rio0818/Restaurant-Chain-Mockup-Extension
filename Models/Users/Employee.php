@@ -56,30 +56,20 @@ class Employee extends User implements FileConvertible
     public function toString(): string
     {
         return sprintf(
-            "
-            User ID: %d \n
-            Name : %s %s\n
-            Email: %s\n
-            Address: %s\n
-            BirthDate: %s\n
-            MemberShip Expiration Date: %s\n
-            Role: %s\n
-            JobTitle: %s\n
-            Salary: %s\n
-            StartDate : %s\n
-            Award: %s\n
-            ",
+            "          - ID: %d, " .
+                " Name : %s, " .
+                " Email: %s, " .
+                " BirthDate: %s, " .
+                " Role: %s, " .
+                " Salary: $%s, " .
+                " StartDate : %s \n",
             $this->getId(),
-            $this->getFirstName(),
-            $this->getLastName(),
-            $this->getAddress(),
+            $this->getFullName(),
+            $this->getEmail(),
             $this->getBirthDate()->format("Y-m-d"),
-            $this->getMembershipExpireationDate()->format("Y-m-d"),
             $this->getRole(),
-            $this->jobTitle,
             $this->salary,
-            $this->startDate,
-            $this->awards,
+            $this->startDate->format("Y-m-d"),
         );
     }
 
