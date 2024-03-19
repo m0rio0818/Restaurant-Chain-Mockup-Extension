@@ -106,8 +106,9 @@ class RestaurantLocation implements FileConvertible
         );
     }
 
-    public function getEmployees() : array {
-        return $this->employees;               
+    public function getEmployees(): array
+    {
+        return $this->employees;
     }
 
     public function getAddresss(): string
@@ -125,13 +126,7 @@ class RestaurantLocation implements FileConvertible
     {
         return [
             "name" => $this->name,
-            "address" => $this->address,
-            "zipCode" => $this->zipCode,
-            "state" => $this->state,
-            "city" => $this->city,
-            "employees" => $this->employees,
-            "isOpen" => $this->isOpen,
-            "hasDriveThru" => $this->hasDriveThru,
+            "address" => $this->getAddresss(),
         ];
     }
 }

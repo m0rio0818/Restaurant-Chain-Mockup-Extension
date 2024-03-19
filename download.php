@@ -21,11 +21,11 @@ $postcode_max = isset($_POST["postcode_max"]) ? $_POST["postcode_max"] : "456-78
 $format = $_POST["format"] ?? "html";
 
 
-echo gettype($employee) .  ": " . $employee . PHP_EOL;
-echo gettype($location) .  ": " . $location . PHP_EOL;
-echo gettype($postcode_max) . ": " . $postcode_max . " " .  gettype($postcode_min) . ": " . $postcode_min . PHP_EOL;
-echo "min_salary : " . $salary_min . " " . "max_salary: " . $salary_max . PHP_EOL;
-echo gettype($format) . ": " . $format . PHP_EOL;
+// echo gettype($employee) .  ": " . $employee . PHP_EOL;
+// echo gettype($location) .  ": " . $location . PHP_EOL;
+// echo gettype($postcode_max) . ": " . $postcode_max . " " .  gettype($postcode_min) . ": " . $postcode_min . PHP_EOL;
+// echo "min_salary : " . $salary_min . " " . "max_salary: " . $salary_max . PHP_EOL;
+// echo gettype($format) . ": " . $format . PHP_EOL;
 
 if (
     is_null($employee) || is_null($location) || is_null($salary_min) || is_null($salary_max) ||
@@ -72,8 +72,9 @@ if ($format == "md") {
 } else if ($format == "json") {
     header("Content-Type: text/json");
     header("Content-Disposition: attachment; filename=user.json");
-    $usersArray = array_map(fn ($user) => $user->toArray(), $users);
-    echo json_encode($usersArray);
+    // $usersArray = array_map(fn ($user) => $user->toArray(), $users);
+    // echo json_encode($usersArray);
+    GenerateFiles::generateJson($restrauntChains);
 } else if ($format == "text") {
     header("Content-Type: text/plain");
     header("Content-Disposition: attachment; filename=user.txt");

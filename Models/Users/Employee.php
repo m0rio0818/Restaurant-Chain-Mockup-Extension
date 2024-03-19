@@ -47,6 +47,12 @@ class Employee extends User implements FileConvertible
         $this->awards = $awards;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getFirstName() . " " . $this->getLastName();
+    }
+
+
     public function toString(): string
     {
         return sprintf(
@@ -98,7 +104,7 @@ class Employee extends User implements FileConvertible
 
     public function toMarkDown(): string
     {
-        return "  - #####  {$this->getFirstName()} {$this->getLastName()} \n"  .
+        return "  - #####  {$this->getFullName()} \n"  .
             "      - Role : {$this->getRole()} \n"  .
             "      - JobTitle : {$this->jobTitle} \n"  .
             "      - Salary : \${$this->salary} \n"  .
@@ -109,19 +115,13 @@ class Employee extends User implements FileConvertible
     {
         return [
             "id" => $this->getId(),
-            "firstName" => $this->getFirstName(),
-            "lastName" => $this->getLastName(),
+            "name" => $this->getFullName(),
             "email" => $this->getEmail(),
-            "password" => $this->getPassword(),
             "phoneNumber" => $this->getPhoneNumber(),
-            "address" => $this->getAddress(),
-            "birthDate" => $this->getBirthDate(),
-            "isActive" => $this->hasMembershipExpired(),
+            "birthDate" => $this->getBirthDate()->format("Y-m-d"),
             "role" => $this->getRole(),
-            "jobtitle" => $this->jobTitle,
             "salary" => $this->salary,
-            "startdate" => $this->startDate,
-            "awards" => $this->awards,
+            "startdate" => $this->startDate->format("Y-m-d"),
         ];
     }
 }

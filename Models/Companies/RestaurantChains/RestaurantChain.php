@@ -126,8 +126,6 @@ class RestaurantChain extends Company implements FileConvertible
             "industry" => $this->getIndustry(),
             "ceo" => $this->getCeo(),
             "country" => $this->getCountry(),
-            "founder" => $this->getFounder(),
-            "totalemployees" => $this->getTotalEmployee(),
         ];
     }
 }
